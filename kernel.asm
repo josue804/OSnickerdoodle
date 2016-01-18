@@ -10500,16 +10500,19 @@ syscall(void)
 80105546:	ff d0                	call   *%eax
 80105548:	89 43 1c             	mov    %eax,0x1c(%ebx)
 8010554b:	eb 3d                	jmp    8010558a <syscall+0x89>
+	    syscallnames[num], proc->tf->eax);
+    #endif
+
   } else {
     cprintf("%d %s: unknown sys call %d\n",
             proc->pid, proc->name, num);
 8010554d:	65 a1 04 00 00 00    	mov    %gs:0x4,%eax
 80105553:	8d 48 6c             	lea    0x6c(%eax),%ecx
 80105556:	65 a1 04 00 00 00    	mov    %gs:0x4,%eax
+	cprintf("%s --> %d\n",
+	    syscallnames[num], proc->tf->eax);
+    #endif
 
-  num = proc->tf->eax;
-  if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
-    proc->tf->eax = syscalls[num]();
   } else {
     cprintf("%d %s: unknown sys call %d\n",
 8010555c:	8b 40 10             	mov    0x10(%eax),%eax
