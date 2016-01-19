@@ -20,4 +20,5 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
-#define SYS_date   22 //JV - define date system call and give it a call number (see syscall.c for function definition.
+#define SYS_date   22 //JV-date - define date system call and give it index
+#define SYS_time   23 //JV-time - define time system call and give it index

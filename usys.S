@@ -29,4 +29,5 @@ SYSCALL(getpid)
 SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
-SYSCALL(date) // JV - defines a system call of name date and moves it into the IDT 
+SYSCALL(date) //JV-date - defines system call date and stores it into IDT
+SYSCALL(time) //JV-time - defines system call time and stores it into IDT

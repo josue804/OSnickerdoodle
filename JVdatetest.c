@@ -14,7 +14,10 @@ main (int argc, char *argv[])
 		exit();
 	}
 
-	printf(1, "%s %s %d %d:%d:%d UTC %d\n", days[dayofweek(r.year,r.month,r.day)], months[r.month - 1], r.day, r.hour, r.minute, r.second, r.year);
+	printf(1, "%s %s %d %d:%d:%d UTC %d\n", 
+		days[dayofweek(r.year,r.month,r.day)], months[r.month - 1], r.day, 
+		r.hour, r.minute, r.second, 
+		r.year);
 
 	if(years_since_alamo(r.year) >= 0)
 		printf(1, "%d years. Remember the Alamo.\n", years_since_alamo(r.year));

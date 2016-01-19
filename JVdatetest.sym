@@ -1,6 +1,6 @@
 00000000 .text
-00000a20 .rodata
-00000ae4 .eh_frame
+00000a28 .rodata
+00000ae0 .eh_frame
 00000d80 .data
 00000dc4 .bss
 00000000 .comment
@@ -10,26 +10,26 @@
 00000000 .debug_line
 00000000 .debug_str
 00000000 .debug_loc
-00000000 date.c
-00000d80 t.1041
+00000000 JVdatetest.c
+00000d80 t.1046
 00000000 ulib.c
 00000262 stosb
 00000000 printf.c
-00000572 putc
-0000059a printint
-00000db0 digits.1038
+0000057a putc
+000005a2 printint
+00000db0 digits.1043
 00000000 umalloc.c
 00000dc4 base
 00000dcc freep
-000008e6 morecore
+000008ee morecore
 00000000 
 00000287 strcpy
-00000652 printf
+0000065a printf
 00000485 memmove
 00000512 mknod
 00000374 gets
 0000054a getpid
-0000093e malloc
+00000946 malloc
 0000055a sleep
 000004da pipe
 000004ea write
@@ -46,6 +46,7 @@
 00000dc1 __bss_start
 0000031d memset
 00000000 main
+00000572 time
 000002b7 strcmp
 00000542 dup
 00000245 years_since_alamo
@@ -62,4 +63,4 @@
 00000341 strchr
 00000532 mkdir
 000004f2 close
-00000805 free
+0000080d free

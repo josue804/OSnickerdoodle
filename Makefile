@@ -157,6 +157,8 @@ mkfs: mkfs.c fs.h
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
 .PRECIOUS: %.o
 
+#JV-date - adds date.c to user program list
+#JV-time - adds time.c to user program list
 UPROGS=\
 	_cat\
 	_echo\
@@ -173,7 +175,10 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
-	_date\
+	_JVdatetest\
+	_JVtime\
+	_JVtimetest\
+	_clear\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

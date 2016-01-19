@@ -98,7 +98,9 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
-extern int sys_date(void); //JV - function declaration for date system call
+extern int sys_date(void); //JV-date-function declaration for date sys_call
+extern int sys_time(void); //JV-time-function declaration for time sys_call
+
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -122,7 +124,8 @@ static int (*syscalls[])(void) = {
 [SYS_link]    sys_link,
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
-[SYS_date]    sys_date, //JV - adds date function to system calls list, with [SYS_date] being the index defined in syscall.h and sys_date calling the function (declaration above).
+[SYS_date]    sys_date, //JV-date - adds date function to system calls list, with [SYS_date] being the index defined in syscall.h and sys_date calling the function (declaration above).
+[SYS_time]    sys_time //JV-time (same as above, except for sys_time)
 };
 
 void

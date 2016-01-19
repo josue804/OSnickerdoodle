@@ -1,5 +1,6 @@
 struct stat;
 struct rtcdate;
+struct args;
 
 // system calls
 int fork(void);
@@ -23,9 +24,10 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
-int date(struct rtcdate * r); //JV - user program that calls system call
+int date(struct rtcdate * r); //JV-date - system call for date, runs sys_date
 int dayofweek(int year, int month, int day); //JV - function that finds day of week, credit to //en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods and to Ethan Grinnell for finding it.
 int years_since_alamo(int year); //calculates years passed since alamo
+int time(char *p[], struct rtcdate * t1, struct rtcdate * t2); //JV-time - system call for time, runs sys_time
 
 // ulib.c
 int stat(char*, struct stat*);

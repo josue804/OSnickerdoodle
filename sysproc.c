@@ -7,6 +7,9 @@
 #include "mmu.h"
 #include "proc.h"
 
+#define MAXARGS 10
+
+
 int
 sys_fork(void)
 {
@@ -90,13 +93,32 @@ sys_uptime(void)
   return xticks;
 }
 
-//JV - KERNEL function for new date system call
+//JV-date - KERNEL function for new date system call
+//returns current UTC date through rtcdate struct d (tied to r in date.c)
 int
 sys_date(void)
 {
 	struct rtcdate *d; //create struct of type rtcdate to hold datetime
 	argptr(0, (void*)&d, sizeof(*d)); //retrieve 0th arg of system call and make d's address that of r (in date.c)
 	cmostime(d); //d updated
+
+	return 0;
+}
+
+//JV-time - KERNEL function for new time system call
+//measures time it takes to complete a process
+int
+sys_time(void)
+{
+	cprintf("\n---IN THE SYSTEM MOFO---\n");
+
+	char *shell_args[MAXARGS];
+	struct rtcdate *parent_t, *child_t; //time of parent/child processes
+
+	argptr(0, (void*)&shell_args, sizeof(*shell_args));
+	argptr(1, (void*)&parent_t, sizeof(*parent_t));
+	argptr(2, (void*)&child_t, sizeof(*child_t));
+
 
 	return 0;
 }
