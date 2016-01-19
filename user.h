@@ -25,6 +25,7 @@ int sleep(int);
 int uptime(void);
 int date(struct rtcdate * r); //JV - user program that calls system call
 int dayofweek(int year, int month, int day); //JV - function that finds day of week, credit to //en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods and to Ethan Grinnell for finding it.
+int years_since_alamo(int year); //calculates years passed since alamo
 
 // ulib.c
 int stat(char*, struct stat*);
