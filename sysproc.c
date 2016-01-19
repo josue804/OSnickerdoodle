@@ -89,3 +89,14 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+//JV - KERNEL function for new date system call
+int
+sys_date(void)
+{
+	struct rtcdate *d; //create struct of type rtcdate to hold datetime
+	argptr(0, (void*)&d, sizeof(*d)); //retrieve 0th arg of system call and make d's address that of r (in date.c)
+	cmostime(d); //d updated
+
+	return 0;
+}
