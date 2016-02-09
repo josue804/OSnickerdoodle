@@ -129,6 +129,7 @@ sys_time(void)
 int
 sys_getgid(void)
 {
+  cprintf("Getting GID = %d\n", proc->gid);
   return proc->gid;
 }
 

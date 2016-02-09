@@ -163,6 +163,7 @@ mkfs: mkfs.c fs.h
 #JV-clear 	 - adds clear.c to user program list
 #JV-getgid 	 - adds getgid.c to user program list
 #JV-getuid 	 - adds getuid.c to user program list
+#JV-testuidgid - adds testuidgid.c to user program list
 UPROGS=\
 	_cat\
 	_echo\
@@ -184,6 +185,7 @@ UPROGS=\
 	_JVtimetest\
 	_JVgetuid\
 	_JVgetgid\
+	_JVtestuidgid\
 	_clear\
 
 

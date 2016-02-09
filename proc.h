@@ -1,5 +1,8 @@
 // Segments in proc->gdt.
 #define NSEGS     7
+#define GID       -2  //default gid at beginning of proc life
+#define UID       -2  //default uid at beginning of proc life
+
 
 // Per-CPU state
 struct cpu {

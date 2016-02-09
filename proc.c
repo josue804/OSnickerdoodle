@@ -47,6 +47,8 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->gid = GID; //JV-gid assign default gid to proc
+  p->uid = UID; //JV-uid assign default uid to proc
   release(&ptable.lock);
 
   // Allocate kernel stack.
@@ -94,7 +96,9 @@ userinit(void)
   p->tf->ss = p->tf->ds;
   p->tf->eflags = FL_IF;
   p->tf->esp = PGSIZE;
-  p->tf->eip = 0;  // beginning of initcode.S
+  p->tf->eip = 0;  // beginning of initcode.
+
+
 
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
@@ -140,8 +144,9 @@ fork(void)
     kfree(np->kstack);
     np->kstack = 0;
     np->state = UNUSED;
-    np->gid = proc->gid; //assign process gid to child process gid
-    np->uid = proc->uid; //assign process uid to child process uid
+    np->gid = proc->gid; //JV-gid assign process gid to child process gid
+    np->uid = proc->uid; //JV-uid assign process uid to child process uid
+    cprintf("FORKING GID = %d, UID = %d, PID = %d\n", proc->gid, proc->uid, proc->pid);
     return -1;
   }
   np->sz = proc->sz;
