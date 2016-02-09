@@ -7,22 +7,18 @@ main(int argc, char *argv[])
 
   int uid, gid, ppid;
 
-
-  printf(1, "WHAT IS IT %d\n", getuid());
-
   uid = getuid();
   printf(2, "Current UID is: %d\n", uid);
-  printf(2, "Setting UID to 100 \n");
-  setuid(100);
-
+  printf(2, "Setting UID to 21 \n");
+  setuid(21);
   uid = getuid();
   printf(2, "Current UID is %d\n\n", uid);
 
 
   gid = getgid();
   printf(2, "Current GID is %d\n", gid);
-  printf(2, "Setting GID to 100\n");
-  setgid(100);
+  printf(2, "Setting GID to 22\n");
+  setgid(22);
   gid = getgid();
   printf(2, "Current GID is %d\n", gid);
 

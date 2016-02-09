@@ -131,7 +131,6 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_date]    sys_date, //JV-date - adds date function to system calls list, with [SYS_date] being the index defined in syscall.h and sys_date calling the function (declaration above).
-[SYS_time]    sys_time, //JV-time (same as above, except for sys_time)
 [SYS_getuid]  sys_getuid, //JV-getuid "
 [SYS_getgid]  sys_getgid, //JV-getgid "
 [SYS_getppid] sys_getppid,//JV-getppid "

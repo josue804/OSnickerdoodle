@@ -105,31 +105,11 @@ sys_date(void)
 	return 0;
 }
 
-//JV-time - KERNEL function for new time system call
-//measures time it takes to complete a process
-int
-sys_time(void)
-{
-	cprintf("\n---IN THE SYSTEM MOFO---\n");
-
-	char *shell_args[MAXARGS];
-	struct rtcdate *parent_t, *child_t; //time of parent/child processes
-
-	argptr(0, (void*)&shell_args, sizeof(*shell_args));
-	argptr(1, (void*)&parent_t, sizeof(*parent_t));
-	argptr(2, (void*)&child_t, sizeof(*child_t));
-
-
-	return 0;
-}
-
-
 //JV-getgid - KERNEL function for new getgid() system call
 //returns the group identificaiton number of the currently running process
 int
 sys_getgid(void)
 {
-  cprintf("Getting GID = %d\n", proc->gid);
   return proc->gid;
 }
 
@@ -160,6 +140,7 @@ sys_setgid(void)
 
   proc->gid = *test; //JV - process gid gets value of fed in int
 
+  cprintf("Returning, hopefully\n");
   return 0;
 }
 

@@ -21,7 +21,6 @@
 #define SYS_mkdir   20
 #define SYS_close   21
 #define SYS_date    22 //JV-date   - define date system call and give it index
-#define SYS_time    23 //JV-time   - define time system call and give it index
 #define SYS_getgid  24 //JV-getgid - define getgid system call and give it index
 #define SYS_getuid  25 //JV-getuid - define getuid system call and give it index
 #define SYS_getppid 26 //JV-getppid - define getppid system call and give it index
