@@ -155,6 +155,12 @@ sys_getppid(void)
 int
 sys_setgid(int value)
 {
+  uint *test;
+
+  cprintf("First arg: %d\n", argptr(0, (void*)&test, sizeof(*test)));
+  cprintf("First arg: %d\n", argptr(1, (void*)&test, sizeof(*test)));
+  cprintf("First arg: %d\n", argptr(2, (void*)&test, sizeof(*test)));
+
   return 0;
 }
 
