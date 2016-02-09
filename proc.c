@@ -140,6 +140,8 @@ fork(void)
     kfree(np->kstack);
     np->kstack = 0;
     np->state = UNUSED;
+    np->gid = proc->gid; //assign process gid to child process gid
+    np->uid = proc->uid; //assign process uid to child process uid
     return -1;
   }
   np->sz = proc->sz;

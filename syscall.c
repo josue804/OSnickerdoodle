@@ -98,8 +98,14 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
-extern int sys_date(void); //JV-date-function declaration for date sys_call
-extern int sys_time(void); //JV-time-function declaration for time sys_call
+extern int sys_date(void); //JV-date-function declaration for date system call
+extern int sys_time(void); //JV-time-function declaration for time system call
+extern int sys_getgid(void); //JV-getgid - function declaration for getgid system call
+extern int sys_getuid(void); //JV-getuid - function declaration for getuid system call
+extern int sys_getppid(void); //JV-getppid - function declaration for getppid system call
+extern int sys_setuid(void); //JV-setuid - function declaration for setuid system call
+extern int sys_setgid(void); //JV-setgid - function declaration for setgid system call
+
 
 
 static int (*syscalls[])(void) = {
@@ -125,7 +131,12 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 [SYS_date]    sys_date, //JV-date - adds date function to system calls list, with [SYS_date] being the index defined in syscall.h and sys_date calling the function (declaration above).
-[SYS_time]    sys_time //JV-time (same as above, except for sys_time)
+[SYS_time]    sys_time, //JV-time (same as above, except for sys_time)
+[SYS_getuid]  sys_getuid, //JV-getuid "
+[SYS_getgid]  sys_getgid, //JV-getgid "
+[SYS_getppid] sys_getppid,//JV-getppid "
+[SYS_setuid]  sys_setuid, //JV-setuid "
+[SYS_setgid]  sys_setgid //JV-setgid "
 };
 
 void

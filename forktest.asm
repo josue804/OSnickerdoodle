@@ -39,7 +39,7 @@ forktest(void)
   int n, pid;
 
   printf(1, "fork test\n");
-  2f:	c7 44 24 04 30 04 00 	movl   $0x430,0x4(%esp)
+  2f:	c7 44 24 04 58 04 00 	movl   $0x458,0x4(%esp)
   36:	00 
   37:	c7 04 24 01 00 00 00 	movl   $0x1,(%esp)
   3e:	e8 bd ff ff ff       	call   0 <printf>
@@ -80,7 +80,7 @@ forktest(void)
     printf(1, "fork claimed to work N times!\n", N);
   7d:	c7 44 24 08 e8 03 00 	movl   $0x3e8,0x8(%esp)
   84:	00 
-  85:	c7 44 24 04 3c 04 00 	movl   $0x43c,0x4(%esp)
+  85:	c7 44 24 04 64 04 00 	movl   $0x464,0x4(%esp)
   8c:	00 
   8d:	c7 04 24 01 00 00 00 	movl   $0x1,(%esp)
   94:	e8 67 ff ff ff       	call   0 <printf>
@@ -95,7 +95,7 @@ forktest(void)
   a5:	85 c0                	test   %eax,%eax
   a7:	79 19                	jns    c2 <forktest+0x99>
       printf(1, "wait stopped early\n");
-  a9:	c7 44 24 04 5b 04 00 	movl   $0x45b,0x4(%esp)
+  a9:	c7 44 24 04 83 04 00 	movl   $0x483,0x4(%esp)
   b0:	00 
   b1:	c7 04 24 01 00 00 00 	movl   $0x1,(%esp)
   b8:	e8 43 ff ff ff       	call   0 <printf>
@@ -120,7 +120,7 @@ forktest(void)
   d1:	83 f8 ff             	cmp    $0xffffffff,%eax
   d4:	74 19                	je     ef <forktest+0xc6>
     printf(1, "wait got too many\n");
-  d6:	c7 44 24 04 6f 04 00 	movl   $0x46f,0x4(%esp)
+  d6:	c7 44 24 04 97 04 00 	movl   $0x497,0x4(%esp)
   dd:	00 
   de:	c7 04 24 01 00 00 00 	movl   $0x1,(%esp)
   e5:	e8 16 ff ff ff       	call   0 <printf>
@@ -129,7 +129,7 @@ forktest(void)
   }
   
   printf(1, "fork test OK\n");
-  ef:	c7 44 24 04 82 04 00 	movl   $0x482,0x4(%esp)
+  ef:	c7 44 24 04 aa 04 00 	movl   $0x4aa,0x4(%esp)
   f6:	00 
   f7:	c7 04 24 01 00 00 00 	movl   $0x1,(%esp)
   fe:	e8 fd fe ff ff       	call   0 <printf>
@@ -695,3 +695,33 @@ SYSCALL(time) //JV-time - defines system call time and stores it into IDT
  425:	b8 17 00 00 00       	mov    $0x17,%eax
  42a:	cd 40                	int    $0x40
  42c:	c3                   	ret    
+
+0000042d <getgid>:
+SYSCALL(getgid) //JV-getgid - defines system call getgid and stores it into IDT (this is referenced in user.h)
+ 42d:	b8 18 00 00 00       	mov    $0x18,%eax
+ 432:	cd 40                	int    $0x40
+ 434:	c3                   	ret    
+
+00000435 <getuid>:
+SYSCALL(getuid) //JV-getuid - defines system call getuid and stores it into IDT (this is referenced in user.h)
+ 435:	b8 19 00 00 00       	mov    $0x19,%eax
+ 43a:	cd 40                	int    $0x40
+ 43c:	c3                   	ret    
+
+0000043d <getppid>:
+SYSCALL(getppid) //JV-getppid - defines system call getppid
+ 43d:	b8 1a 00 00 00       	mov    $0x1a,%eax
+ 442:	cd 40                	int    $0x40
+ 444:	c3                   	ret    
+
+00000445 <setgid>:
+SYSCALL(setgid) //JV-setgid - defines system call setgid
+ 445:	b8 1b 00 00 00       	mov    $0x1b,%eax
+ 44a:	cd 40                	int    $0x40
+ 44c:	c3                   	ret    
+
+0000044d <setuid>:
+SYSCALL(setuid) //JV-setuid - defines system call setuid
+ 44d:	b8 1c 00 00 00       	mov    $0x1c,%eax
+ 452:	cd 40                	int    $0x40
+ 454:	c3                   	ret    

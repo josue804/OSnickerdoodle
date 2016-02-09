@@ -77,7 +77,7 @@ OBJDUMP = $(TOOLPREFIX)objdump
 #CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer
 CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -fvar-tracking -fvar-tracking-assignments -O0 -g -Wall -MD -gdwarf-2 -m32 -Werror -fno-omit-frame-pointer
 CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
-#CFLAGS += -DPRINT_SYSCALLS #JV, thanks Saly
+# CFLAGS += -DPRINT_SYSCALLS #JV, thanks Saly
 ASFLAGS = -m32 -gdwarf-2 -Wa,-divide
 # FreeBSD ld wants ``elf_i386_fbsd''
 LDFLAGS += -m $(shell $(LD) -V | grep elf_i386 2>/dev/null)
@@ -157,8 +157,12 @@ mkfs: mkfs.c fs.h
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
 .PRECIOUS: %.o
 
-#JV-date - adds date.c to user program list
-#JV-time - adds time.c to user program list
+#JV-date 		 - adds JVdate.c to user program list
+#JV-time 		 - adds JVtime.c to user program list
+#JV-timetest - adds JVtimetest.c to user program list
+#JV-clear 	 - adds clear.c to user program list
+#JV-getgid 	 - adds getgid.c to user program list
+#JV-getuid 	 - adds getuid.c to user program list
 UPROGS=\
 	_cat\
 	_echo\
@@ -175,10 +179,13 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
-	_JVdatetest\
+	_JVdate\
 	_JVtime\
 	_JVtimetest\
+	_JVgetuid\
+	_JVgetgid\
 	_clear\
+
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)

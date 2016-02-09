@@ -122,3 +122,45 @@ sys_time(void)
 
 	return 0;
 }
+
+
+//JV-getgid - KERNEL function for new getgid() system call
+//returns the group identificaiton number of the currently running process
+int
+sys_getgid(void)
+{
+  return proc->gid;
+}
+
+//JV-getuid - KERNEL function for new getuid() system call
+//returns the user identification number of the currently running process
+int
+sys_getuid(void)
+{
+  return proc->uid;
+}
+
+//JV-geppid - KERNEL function for new getppid() system call
+//returns the process identificaiton number of the currently running process'
+//parent
+int
+sys_getppid(void)
+{
+  return 0;
+}
+
+//JV-setgid - KERNEL function for new setgid() system call
+//assigns a gid to current process using fed in int
+int
+sys_setgid(int value)
+{
+  return 0;
+}
+
+//JV-setuid - KERNEL function for new setuid() system call
+//assigns a pid to current process using fed in int
+int
+sys_setuid(int value)
+{
+  return 0;
+}

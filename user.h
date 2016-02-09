@@ -25,9 +25,16 @@ char* sbrk(int);
 int sleep(int);
 int uptime(void);
 int date(struct rtcdate * r); //JV-date - system call for date, runs sys_date
+int time(char *p[], struct rtcdate * t1, struct rtcdate * t2); //JV-time - system call for time, runs sys_time
+int getgid(void); //JV-getgid - system call for getgid
+int getuid(void); //JV-getuid - system call for getuid
+int getppid(void); //JV-getppid - system call for returning parent PID
+int setuid(int); //JV-setuid - system call for setting uid to int
+int setgid(int); //JV-setgid - system call for setting gid to int
+
+//JV - my supplemental functions
 int dayofweek(int year, int month, int day); //JV - function that finds day of week, credit to //en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods and to Ethan Grinnell for finding it.
 int years_since_alamo(int year); //calculates years passed since alamo
-int time(char *p[], struct rtcdate * t1, struct rtcdate * t2); //JV-time - system call for time, runs sys_time
 
 // ulib.c
 int stat(char*, struct stat*);
