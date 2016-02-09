@@ -29,8 +29,8 @@ int time(char *p[], struct rtcdate * t1, struct rtcdate * t2); //JV-time - syste
 int getgid(void); //JV-getgid - system call for getgid
 int getuid(void); //JV-getuid - system call for getuid
 int getppid(void); //JV-getppid - system call for returning parent PID
-int setuid(int); //JV-setuid - system call for setting uid to int
-int setgid(int); //JV-setgid - system call for setting gid to int
+int setgid(int new_gid); //JV-setuid - system call for setting uid to int
+int setuid(int new_uid); //JV-setgid - system call for setting gid to int
 
 //JV - my supplemental functions
 int dayofweek(int year, int month, int day); //JV - function that finds day of week, credit to //en.wikipedia.org/wiki/Determination_of_the_day_of_the_week#Implementation-dependent_methods and to Ethan Grinnell for finding it.

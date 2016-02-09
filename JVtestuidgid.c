@@ -5,7 +5,7 @@ int
 main(int argc, char *argv[])
 {
 
-  uint uid, gid, ppid;
+  int uid, gid, ppid;
 
 
   printf(1, "WHAT IS IT %d\n", getuid());
@@ -16,7 +16,7 @@ main(int argc, char *argv[])
   setuid(100);
 
   uid = getuid();
-  printf(2, "Current UID is %d\n", uid);
+  printf(2, "Current UID is %d\n\n", uid);
 
 
   gid = getgid();

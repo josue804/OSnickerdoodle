@@ -147,19 +147,18 @@ sys_getuid(void)
 int
 sys_getppid(void)
 {
-  return 0;
+  return proc->parent->pid;
 }
 
 //JV-setgid - KERNEL function for new setgid() system call
 //assigns a gid to current process using fed in int
 int
-sys_setgid(int value)
+sys_setgid(void)
 {
-  uint *test;
+  int *test = 0; 
+  argint(0, test); //JV - make test point to first arg as integer
 
-  cprintf("First arg: %d\n", argptr(0, (void*)&test, sizeof(*test)));
-  cprintf("First arg: %d\n", argptr(1, (void*)&test, sizeof(*test)));
-  cprintf("First arg: %d\n", argptr(2, (void*)&test, sizeof(*test)));
+  proc->gid = *test; //JV - process gid gets value of fed in int
 
   return 0;
 }
@@ -169,5 +168,10 @@ sys_setgid(int value)
 int
 sys_setuid(int value)
 {
+  int *test = 0; 
+  argint(0, test); //JV - make test point to first arg as integer
+
+  proc->uid = *test; //JV - process gid gets value of fed in int
+
   return 0;
 }
