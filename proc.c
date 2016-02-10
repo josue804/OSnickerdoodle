@@ -462,7 +462,8 @@ procdump(void)
       state = states[p->state];
     else
       state = "???";
-    cprintf("%d %s %s", p->pid, state, p->name);
+    cprintf("pid:%d uid:%d gid:%dstate:%s name:%s",  //JV - added uid/gid
+        p->pid, p->uid, p->gid, state, p->name);
     if(p->state == SLEEPING){
       getcallerpcs((uint*)p->context->ebp+2, pc);
       for(i=0; i<10 && pc[i] != 0; i++)
@@ -489,7 +490,6 @@ getallprocinfo(int max, struct uproc *table)
   [RUNNING]   "run   ",
   [ZOMBIE]    "zombie"
   };
-
 
   acquire(&ptable.lock); //JV - lock table so that process list does not change
 

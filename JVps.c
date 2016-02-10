@@ -13,6 +13,11 @@ main(int argc, char *argv[])
 
   entries_used = getprocs(MAX_UPROC, table);
 
+  if(entries_used < 0){
+		printf(2, "Error: getprocs call failed. %s at line %d :(\n", __FILE__, __LINE__);
+		exit();
+  }
+
   printf(1, "There are %d processes\n\n", entries_used);
 
   for(i = 0; i < entries_used; ++i){
