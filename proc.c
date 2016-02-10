@@ -6,6 +6,7 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "JVps.h"
 
 struct {
   struct spinlock lock;
@@ -144,13 +145,12 @@ fork(void)
     kfree(np->kstack);
     np->kstack = 0;
     np->state = UNUSED;
-    np->gid = proc->gid; //JV-gid assign process gid to child process gid
-    np->uid = proc->uid; //JV-uid assign process uid to child process uid
-    cprintf("FORKING GID = %d, UID = %d, PID = %d\n", proc->gid, proc->uid, proc->pid);
     return -1;
   }
   np->sz = proc->sz;
   np->parent = proc;
+  np->gid = proc->gid; //JV-gid assign process gid to child process gid
+  np->uid = proc->uid; //JV-uid assign process uid to child process uid
   *np->tf = *proc->tf;
 
   // Clear %eax so that fork returns 0 in the child.
@@ -470,4 +470,50 @@ procdump(void)
     }
     cprintf("\n");
   }
+}
+
+
+//JV_systemcalls
+//returns the number of entries in the processes table and
+//copies appropriate data to uproc fed in
+int
+getallprocinfo(int max, struct uproc *table)
+{
+  struct proc *p;
+  int i = 0; //JV - keeps track of entries in ptable
+  static char *states[] = {
+  [UNUSED]    "unused",
+  [EMBRYO]    "embryo",
+  [SLEEPING]  "sleep ",
+  [RUNNABLE]  "runble",
+  [RUNNING]   "run   ",
+  [ZOMBIE]    "zombie"
+  };
+
+
+  acquire(&ptable.lock); //JV - lock table so that process list does not change
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC] && i < max && p->state != UNUSED; p++){
+
+    //copy process contents over to table
+    strncpy(table -> name, p -> name, sizeof(table -> name));
+    table -> pid = p -> pid;
+    table -> uid = p -> uid;
+    table -> gid = p -> gid;
+    if(p->parent) 
+      table -> ppid = p -> parent -> pid;
+    else
+      table -> ppid = 0;
+    table -> size = p -> sz;
+    strncpy(table -> state, states[p->state], sizeof(table -> state));
+    ++table; //next array space
+    ++i; //increment number of processes
+  }
+
+  --table;
+
+  release(&ptable.lock); //JV - done with ptable
+
+
+  return i;
 }

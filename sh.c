@@ -1,7 +1,6 @@
 // Shell.
 // 2015-12-21. Added very simple processing for builtin commands
 
-
 #include "types.h"
 #include "user.h"
 #include "fcntl.h"
@@ -227,7 +226,6 @@ dobuiltin(char *cmd) {
   for (i=0; i<FDTcount; i++) 
     if (strncmp(cmd, fdt[i].cmd, strlen(fdt[i].cmd)) == 0) 
      (*fdt[i].name)(cmd);
-
 }
 
 // ***** processing for shell builtins ends here *****
@@ -235,7 +233,6 @@ dobuiltin(char *cmd) {
 int
 main(void)
 {
-
   static char buf[100];
   int fd;
   
@@ -266,7 +263,6 @@ main(void)
       runcmd(parsecmd(buf));
     wait();
   }
-
   exit();
 }
 

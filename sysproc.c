@@ -6,6 +6,7 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "JVps.h"
 
 #define MAXARGS 10
 
@@ -106,7 +107,7 @@ int
 sys_date(void)
 {
 	struct rtcdate *d; //create struct of type rtcdate to hold datetime
-	argptr(0, (void*)&d, sizeof(*d)); //retrieve 0th arg of system call and make d's address that of r (in date.c)
+	argptr(0, (void*)&d, sizeof(*d)); //retrieve 0th arg of system call and make d point to it (fed in date.c)
 	cmostime(d); //d updated
 
 	return 0;
@@ -143,36 +144,44 @@ sys_getppid(void)
 }
 
 
-
 //assigns a gid to current process using fed in int
 int
 sys_setgid(void)
 {
-  int *test = 0; 
-  argint(0, test); //JV - make test point to first arg as integer
+  int new_gid = 0; 
+  argint(0, &new_gid); //JV - make test point to first arg as integer
 
-  proc->gid = *test; //JV - process gid gets value of fed in int
+  proc->gid = new_gid; //JV - process gid gets value of fed in int
 
-  return *test;
+  return new_gid;
 }
-
 
 
 //assigns a pid to current process using fed in int
 int
 sys_setuid(void)
 {
-  int *test = 0; 
-  argint(0, test); //JV - make test point to first arg as integer
+  int new_uid = 0; 
+  argint(0, &new_uid); //JV - make test point to first arg as integer
 
-  proc->uid = *test; //JV - process gid gets value of fed in int
+  proc->uid = new_uid; //JV - process gid gets value of fed in int
 
-  return *test;
+  return new_uid;
 }
 
+//fills an array of uprocs with processes and their data, see JVps.h
 int
 sys_getprocs(void)
 {
-  cprintf("It working\n");
-  return 0;
+  int proc_entries = 0; //JV - keeps track of number of entries in ptable
+  int max = 0;
+  argint(0, &max);
+  struct uproc *table;
+
+
+  argptr(1, (void*)&table, sizeof(*table));
+
+  proc_entries = getallprocinfo(max, table);
+
+	return proc_entries;
 }

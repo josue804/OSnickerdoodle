@@ -1,6 +1,7 @@
 struct stat;
 struct rtcdate;
 struct args;
+struct uproc; //JV - declaration of uproc which is defined in JVps.h
 
 //JV_systemcalls - user available functions for calling system calls
 int fork(void);
@@ -32,8 +33,9 @@ int time(char *p[], struct rtcdate * t1, struct rtcdate * t2);
 int getgid(void); 
 int getuid(void); 
 int getppid(void); 
-int setgid(int new_gid); 
-int setuid(int new_uid); 
+int setgid(int new_gid); //sets gid to new_gid
+int setuid(int new_uid); //sets uid to new_uid
+int getprocs(int max, struct uproc *table); //returns processes through array of uproc table, which has a max number of processes stored
 
 
 //JV - my supplemental functions; NOT system calls

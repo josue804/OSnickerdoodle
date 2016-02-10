@@ -8,6 +8,7 @@ struct rtcdate;
 struct spinlock;
 struct stat;
 struct superblock;
+struct uproc; //JV_systemcalls - uproc
 
 // bio.c
 void            binit(void);
@@ -118,6 +119,7 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+int             getallprocinfo(int max, struct uproc *table); //JV_systemcalls - accesses ptable and fills fed in table with appropriate data for each process
 
 // swtch.S
 void            swtch(struct context**, struct context*);

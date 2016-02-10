@@ -157,13 +157,10 @@ mkfs: mkfs.c fs.h
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
 .PRECIOUS: %.o
 
-#JV-date 		 - adds JVdate.c to user program list
-#JV-time 		 - adds JVtime.c to user program list
-#JV-timetest - adds JVtimetest.c to user program list
-#JV-clear 	 - adds clear.c to user program list
-#JV-getgid 	 - adds getgid.c to user program list
-#JV-getuid 	 - adds getuid.c to user program list
-#JV-testuidgid - adds testuidgid.c to user program list
+
+#JV_systemcalls
+#JV*- adds *.c to user program list
+#JV files made by Josue
 UPROGS=\
 	_cat\
 	_echo\
@@ -186,6 +183,7 @@ UPROGS=\
 	_JVgetuid\
 	_JVgetgid\
 	_JVtestuidgid\
+	_JVps\
 	_clear\
 
 
