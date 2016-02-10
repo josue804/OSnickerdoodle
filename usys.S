@@ -8,6 +8,7 @@
     int $T_SYSCALL; \
     ret
 
+//JV_systemcalls - defines system calls and stores them into the IDT (interrupt data table)
 SYSCALL(fork)
 SYSCALL(exit)
 SYSCALL(wait)
@@ -29,9 +30,12 @@ SYSCALL(getpid)
 SYSCALL(sbrk)
 SYSCALL(sleep)
 SYSCALL(uptime)
-SYSCALL(date) //JV-date - defines system call date and stores it into IDT
-SYSCALL(getgid) //JV-getgid - defines system call getgid and stores it into IDT (this is referenced in user.h)
-SYSCALL(getuid) //JV-getuid - defines system call getuid and stores it into IDT (this is referenced in user.h)
-SYSCALL(getppid) //JV-getppid - defines system call getppid
-SYSCALL(setgid) //JV-setgid - defines system call setgid
-SYSCALL(setuid) //JV-setuid - defines system call setuid
+
+//JV - system calls below added by Josue
+SYSCALL(date)
+SYSCALL(getgid) 
+SYSCALL(getuid) 
+SYSCALL(getppid)
+SYSCALL(setgid)
+SYSCALL(setuid)
+SYSCALL(getprocs) 

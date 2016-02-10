@@ -93,7 +93,14 @@ sys_uptime(void)
   return xticks;
 }
 
-//JV-date - KERNEL function for new date system call
+
+//***********************JV-systemcalls***********************
+//This is where system calls are implemented for KERNEL use.
+//Functions below written by Josue
+//************************************************************
+
+
+
 //returns current UTC date through rtcdate struct d (tied to r in date.c)
 int
 sys_date(void)
@@ -105,23 +112,28 @@ sys_date(void)
 	return 0;
 }
 
-//JV-getgid - KERNEL function for new getgid() system call
+
+
 //returns the group identificaiton number of the currently running process
 int
 sys_getgid(void)
 {
-  return proc->gid;
+  int gid = proc->gid;
+  return gid;
 }
 
-//JV-getuid - KERNEL function for new getuid() system call
+
+
 //returns the user identification number of the currently running process
 int
 sys_getuid(void)
 {
-  return proc->uid;
+  int uid = proc->uid;
+  return uid;
 }
 
-//JV-geppid - KERNEL function for new getppid() system call
+
+
 //returns the process identificaiton number of the currently running process'
 //parent
 int
@@ -130,7 +142,8 @@ sys_getppid(void)
   return proc->parent->pid;
 }
 
-//JV-setgid - KERNEL function for new setgid() system call
+
+
 //assigns a gid to current process using fed in int
 int
 sys_setgid(void)
@@ -140,19 +153,26 @@ sys_setgid(void)
 
   proc->gid = *test; //JV - process gid gets value of fed in int
 
-  cprintf("Returning, hopefully\n");
-  return 0;
+  return *test;
 }
 
-//JV-setuid - KERNEL function for new setuid() system call
+
+
 //assigns a pid to current process using fed in int
 int
-sys_setuid(int value)
+sys_setuid(void)
 {
   int *test = 0; 
   argint(0, test); //JV - make test point to first arg as integer
 
   proc->uid = *test; //JV - process gid gets value of fed in int
 
+  return *test;
+}
+
+int
+sys_getprocs(void)
+{
+  cprintf("It working\n");
   return 0;
 }

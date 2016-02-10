@@ -77,6 +77,7 @@ argstr(int n, char **pp)
   return fetchstr(addr, pp);
 }
 
+//JV_systemcalls - function declarations for system calls usedy by XV6 OS
 extern int sys_chdir(void);
 extern int sys_close(void);
 extern int sys_dup(void);
@@ -98,44 +99,50 @@ extern int sys_unlink(void);
 extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
-extern int sys_date(void); //JV-date-function declaration for date system call
-extern int sys_time(void); //JV-time-function declaration for time system call
-extern int sys_getgid(void); //JV-getgid - function declaration for getgid system call
-extern int sys_getuid(void); //JV-getuid - function declaration for getuid system call
-extern int sys_getppid(void); //JV-getppid - function declaration for getppid system call
-extern int sys_setuid(void); //JV-setuid - function declaration for setuid system call
-extern int sys_setgid(void); //JV-setgid - function declaration for setgid system call
+
+//JV_systemcalls - system calls written by Josue Valverde
+extern int sys_date(void);
+extern int sys_time(void);
+extern int sys_getgid(void); 
+extern int sys_getuid(void); 
+extern int sys_getppid(void);
+extern int sys_setuid(void);
+extern int sys_setgid(void);
+extern int sys_getprocs(void);
 
 
 
+//JV_systemcalls - creates system call list (array) where the position of a system call is
+//determined by its id
 static int (*syscalls[])(void) = {
-[SYS_fork]    sys_fork,
-[SYS_exit]    sys_exit,
-[SYS_wait]    sys_wait,
-[SYS_pipe]    sys_pipe,
-[SYS_read]    sys_read,
-[SYS_kill]    sys_kill,
-[SYS_exec]    sys_exec,
-[SYS_fstat]   sys_fstat,
-[SYS_chdir]   sys_chdir,
-[SYS_dup]     sys_dup,
-[SYS_getpid]  sys_getpid,
-[SYS_sbrk]    sys_sbrk,
-[SYS_sleep]   sys_sleep,
-[SYS_uptime]  sys_uptime,
-[SYS_open]    sys_open,
-[SYS_write]   sys_write,
-[SYS_mknod]   sys_mknod,
-[SYS_unlink]  sys_unlink,
-[SYS_link]    sys_link,
-[SYS_mkdir]   sys_mkdir,
-[SYS_close]   sys_close,
-[SYS_date]    sys_date, //JV-date - adds date function to system calls list, with [SYS_date] being the index defined in syscall.h and sys_date calling the function (declaration above).
-[SYS_getuid]  sys_getuid, //JV-getuid "
-[SYS_getgid]  sys_getgid, //JV-getgid "
-[SYS_getppid] sys_getppid,//JV-getppid "
-[SYS_setuid]  sys_setuid, //JV-setuid "
-[SYS_setgid]  sys_setgid //JV-setgid "
+[SYS_fork]     sys_fork,
+[SYS_exit]     sys_exit,
+[SYS_wait]     sys_wait,
+[SYS_pipe]     sys_pipe,
+[SYS_read]     sys_read,
+[SYS_kill]     sys_kill,
+[SYS_exec]     sys_exec,
+[SYS_fstat]    sys_fstat,
+[SYS_chdir]    sys_chdir,
+[SYS_dup]      sys_dup,
+[SYS_getpid]   sys_getpid,
+[SYS_sbrk]     sys_sbrk,
+[SYS_sleep]    sys_sleep,
+[SYS_uptime]   sys_uptime,
+[SYS_open]     sys_open,
+[SYS_write]    sys_write,
+[SYS_mknod]    sys_mknod,
+[SYS_unlink]   sys_unlink,
+[SYS_link]     sys_link,
+[SYS_mkdir]    sys_mkdir,
+[SYS_close]    sys_close,
+[SYS_date]     sys_date, //JV_systemcalls - system calls from date onwards created by Josue 
+[SYS_getuid]   sys_getuid,
+[SYS_getgid]   sys_getgid, 
+[SYS_getppid]  sys_getppid,
+[SYS_setuid]   sys_setuid, 
+[SYS_setgid]   sys_setgid,
+[SYS_getprocs] sys_getprocs
 };
 
 void
@@ -171,12 +178,12 @@ syscall(void)
     [SYS_mkdir]   "mkdir",
     [SYS_close]   "close",
     [SYS_date]    "date",
-/*    [SYS_getuid]  "getuid",
+    [SYS_getuid]  "getuid",
     [SYS_setuid]  "setuid",
     [SYS_getgid]  "getgid",
     [SYS_setgid]  "setgid",
     [SYS_getppid] "getppid",
-    [SYS_getprocs] "getprocs"*/
+    [SYS_getprocs] "getprocs"
     };
 
 	cprintf("%s --> %d\n",
